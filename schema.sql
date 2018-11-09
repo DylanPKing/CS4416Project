@@ -13,8 +13,8 @@ CREATE TABLE Statistics (
 	death INT NOT NULL,
 	assists INT NOT NULL,
 
-	PRIMARY KEY (username)
-	
+	PRIMARY KEY (username),
+
 	FOREIGN KEY fk_username(username)
 	REFERENCES Accounts(username)
 	ON UPDATE CASCADE
@@ -27,7 +27,7 @@ CREATE TABLE Loadouts (
 	secondary_weapon_name VARCHAR(128),
 	perk_name VARCHAR(128),
 
-	PRIMARY KEY (username, loadout_name)
+	PRIMARY KEY (username, loadout_name),
 
 	FOREIGN KEY fk_username(username)
 	REFERENCES Accounts(username)
