@@ -65,3 +65,4 @@ CREATE TABLE Perks (
 
 	PRIMARY KEY (perk_name)
 )	ENGINE = INNODB;
+-- nah you
