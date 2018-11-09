@@ -14,6 +14,7 @@ CREATE TABLE Statistics (
 	assists INT NOT NULL,
 
 	PRIMARY KEY (username)
+	
 	FOREIGN KEY fk_username(username)
 	REFERENCES Accounts(username)
 	ON UPDATE CASCADE
@@ -27,16 +28,20 @@ CREATE TABLE Loadouts (
 	perk_name VARCHAR(128),
 
 	PRIMARY KEY (username, loadout_name)
+
 	FOREIGN KEY fk_username(username)
 	REFERENCES Accounts(username)
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
+
 	FOREIGN KEY fk_primary_weapon_name (primary_weapon_name)
 	REFERENCES Primary_Weapons(primary_weapon_name)
 	ON UPDATE CASCADE
+
 	FOREIGN KEY fk_secondary_weapon_name (secondary_weapon_name)
 	REFERENCES Secondary_Weapons(secondary_weapon_name)
 	ON UPDATE CASCADE
+
 	FOREIGN KEY fk_perk_name (perk_name)
 	REFERENCES Perks(perk_name)
 	ON UPDATE CASCADE
