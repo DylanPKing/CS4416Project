@@ -1,11 +1,36 @@
 CREATE TABLE Accounts (
 	email VARCHAR(128) NOT NULL,
-	username VARCHAR(128) NOT NULL UNIQUE,
+	username VARCHAR(128) NOT NULL,
 	password VARCHAR(128) NOT NULL,
 	level INT(3) NOT NULL,
 
-	PRIMARY KEY (email)
-)	ENGINE= INNODB;
+	PRIMARY KEY (email),
+	UNIQUE KEY un_username (username)
+)	ENGINE = INNODB;
+
+CREATE TABLE Primary_Weapons (
+	primary_weapon_name VARCHAR(128) NOT NULL,
+	rate_of_fire DOUBLE NOT NULL,
+	accuracy DOUBLE NOT NULL,
+
+	PRIMARY KEY (primary_weapon_name)
+)	ENGINE = INNODB;
+
+CREATE TABLE Secondary_Weapons (
+	secondary_weapon_name VARCHAR(128) NOT NULL,
+	rate_of_fire DOUBLE NOT NULL,
+	accuracy DOUBLE NOT NULL,
+
+	PRIMARY KEY (secondary_weapon_name)
+)	ENGINE = INNODB;
+
+CREATE TABLE Perks (
+	perk_name VARCHAR(128) NOT NULL,
+	rate_of_fire DOUBLE NOT NULL,
+	accuracy DOUBLE NOT NULL,
+
+	PRIMARY KEY (perk_name)
+)	ENGINE = INNODB;
 
 CREATE TABLE Statistics (
 	username VARCHAR(128) NOT NULL,
@@ -47,27 +72,5 @@ CREATE TABLE Loadouts (
 	ON UPDATE CASCADE
 )	ENGINE = INNODB;
 
-CREATE TABLE Primary_Weapons (
-	primary_weapon_name VARCHAR(128) NOT NULL,
-	rate_of_fire DOUBLE NOT NULL,
-	accuracy DOUBLE NOT NULL,
 
-	PRIMARY KEY (primary_weapon_name)
-)	ENGINE = INNODB;
-
-CREATE TABLE Secondary_Weapons (
-	secondary_weapon_name VARCHAR(128) NOT NULL,
-	rate_of_fire DOUBLE NOT NULL,
-	accuracy DOUBLE NOT NULL,
-
-	PRIMARY KEY (secondary_weapon_name)
-)	ENGINE = INNODB;
-
-CREATE TABLE Perks (
-	perk_name VARCHAR(128) NOT NULL,
-	rate_of_fire DOUBLE NOT NULL,
-	accuracy DOUBLE NOT NULL,
-
-	PRIMARY KEY (perk_name)
-)	ENGINE = INNODB;
 -- nah you
