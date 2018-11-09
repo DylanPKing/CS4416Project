@@ -29,7 +29,7 @@ CREATE TABLE Loadouts (
 
 	PRIMARY KEY (username, loadout_name),
 
-	FOREIGN KEY fk_username(username)
+	FOREIGN KEY fk_ac_username(username)
 	REFERENCES Accounts(username)
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
