@@ -22,7 +22,7 @@ FROM (
 ) player_kills
 ORDER BY kills DESC
 
--- query 3 --> containg a group by and having clauses
+-- query 3 --> containg a group by and having clauses and a subquery
 -- This query creates a table of the weapons that are currently in any players loadout.
 SELECT primary_weapon_name
 FROM primary_weapons
