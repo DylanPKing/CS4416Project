@@ -73,7 +73,7 @@ INSERT INTO Perks (perk_name, rate_of_fire_boost, accuracy_boost) VALUES
 ('Superman', 5, 0.06);
 
 -- Table Structure for 'Statistics'
-CREATE TABLE Statistics (
+CREATE TABLE Stats (
 	username VARCHAR(128) NOT NULL,
 	kills INT DEFAULT 0,
 	deaths INT DEFAULT 0,
@@ -88,7 +88,7 @@ CREATE TABLE Statistics (
 )	ENGINE = INNODB;
 
 -- Data for table 'Statistics'
-INSERT INTO Statistics (username, kills, deaths, assists) VALUES
+INSERT INTO Stats (username, kills, deaths, assists) VALUES
 ('DKing1543', 5, 7, 2),
 ('SoulsIsGood', 36, 20, 40),
 ('bmalone100', 16, 7, 6),
