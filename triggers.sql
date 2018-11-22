@@ -37,15 +37,18 @@ END; //
 
 
 DELIMITER //
-CREATE FUNCTION averagekd
-    RETURNS DOUBLE
+CREATE FUNCTION averagekd()
+	RETURNS DOUBLE
+    DETERMINISTIC
 READS SQL DATA
 BEGIN
-    DECLARE average DOUBLE
-    DECLARE total_kills INT
+    DECLARE average DOUBLE;
+    DECLARE total_kills DOUBLE;
+    DECLARE total_deaths DOUBLE;
     
-    SET total_kills = SUM(USE INDEX(kills))
+    SET total_kills = (SELECT SUM(kills) FROM stats WHERE kills > 0);
+    SET total_deaths = (SELECT SUM(deaths) FROM stats);
                  
-   
-    RETURNS average;
+    SET average = kills/deaths;
+    RETURN average;
 END;//
