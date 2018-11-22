@@ -1,19 +1,14 @@
-
-DELIMITER//
-CREATE TRIGGER avg_kd
-    AFTER UPDATE ON stats
-    FOR EACH ROW
-    CALL averagekd
-END;//
-
 DELIMITER //
-CREATE PROCEDURE statProcedure()
+CREATE PROCEDURE statProcedure(
+    IN a VARCHAR(128),
+    IN b INT(11),
+    IN C INT(11),
+    IN d INT(11)
+)
 BEGIN
     INSERT INTO stats(username, kills, deaths, assists) 
-    VALUES (NEW.username, 0, 0, 0); 
+    VALUES (a, b, c, d); 
 END; //
-
-
 
 DELIMITER //
 CREATE TRIGGER makeStats
@@ -22,8 +17,6 @@ CREATE TRIGGER makeStats
 BEGIN 
     CALL statProcedure(NEW.username, 0, 0, 0);
 END; //
-
-
 
 DELIMITER //
 CREATE FUNCTION averagekd()
@@ -35,19 +28,20 @@ BEGIN
     DECLARE total_kills DOUBLE;
     DECLARE total_deaths DOUBLE;
     
-    SET total_kills = (SELECT SUM(kills) FROM stats WHERE kills > 0);
-    SET total_deaths = (SELECT SUM(deaths) FROM stats);
+    
+    SELECT SUM(kills) INTO total_kills FROM stats WHERE kills > 0;
+    SELECT SUM(deaths) INTO total_deaths FROM stats;
                  
-    SET average = kills/deaths;
+    SET average = total_kills/total_deaths;
     RETURN average;
 END;//
-
-
 
 DELIMITER //
 CREATE TRIGGER avg_kd
     AFTER UPDATE ON stats
     FOR EACH ROW
 BEGIN
-    CALL averagekd();
-end; //
+    DECLARE averagekills DOUBLE;
+    SELECT averagekd() INTO averagekills;
+END;
+//
