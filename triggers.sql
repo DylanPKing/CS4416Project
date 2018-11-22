@@ -1,15 +1,3 @@
-DELIMITER //
-CREATE FUNCTION averagekd
-    RETURNS DOUBLE
-READS SQL DATA
-BEGIN
-    DECLARE average DOUBLE
-    SET average =  (SELECT FORMAT(SUM kills)
-                    FROM stats)/
-                    (SELECT FORMAT(SUM deaths)
-                     FROM stats)
-    RETURN average
-END;//
 
 DELIMITER//
 CREATE TRIGGER avg_kd
@@ -25,6 +13,8 @@ BEGIN
     VALUES (NEW.username, 0, 0, 0); 
 END; //
 
+
+
 DELIMITER //
 CREATE TRIGGER makeStats
     AFTER INSERT ON Accounts 
@@ -32,7 +22,6 @@ CREATE TRIGGER makeStats
 BEGIN 
     CALL statProcedure(NEW.username, 0, 0, 0);
 END; //
-
 
 
 
@@ -52,3 +41,13 @@ BEGIN
     SET average = kills/deaths;
     RETURN average;
 END;//
+
+
+
+DELIMITER //
+CREATE TRIGGER avg_kd
+    AFTER UPDATE ON stats
+    FOR EACH ROW
+BEGIN
+    CALL averagekd();
+end; //
