@@ -1,3 +1,4 @@
+--Procedure to insert into the stats table
 DELIMITER //
 CREATE PROCEDURE statProcedure(
     IN a VARCHAR(128),
@@ -10,6 +11,7 @@ BEGIN
     VALUES (a, b, c, d); 
 END; //
 
+--Trigger to call the statProcedure after inserting into the account table
 DELIMITER //
 CREATE TRIGGER makeStats
     AFTER INSERT ON Accounts 
@@ -18,6 +20,8 @@ BEGIN
     CALL statProcedure(NEW.username, 0, 0, 0);
 END; //
 
+--Function to calculate the total kills and total deaths in the stats table.
+--Returns the result of total kills divided by total deaths
 DELIMITER //
 CREATE FUNCTION averagekd()
 	RETURNS DOUBLE
@@ -36,6 +40,7 @@ BEGIN
     RETURN average;
 END;//
 
+--Trigger to call the averagekd function after the stats table has been updated
 DELIMITER //
 CREATE TRIGGER avg_kd
     AFTER UPDATE ON stats
